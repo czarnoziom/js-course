@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <script>
+        var liczby = [1, 5, 10, 15, 20, 25];
+
+        // MAP
+        let podwojenia = function (x) {
+            return x + 10;
+        };
+
+        let map = function (data, callback) {
+            let result = [];
+            for (let i = 0; i < data.length; i++) {
+                result.push(callback(data[i]));
+            }
+            return result;
+        }
+
+        console.log("DANA TABLICA");
+        console.log(liczby);
+        console.log("");
+        console.log("MAP x + 10");
+        console.log(map(liczby, podwojenia));
+
+        // FILTER
+        let wieksze = function (x) {
+            return x >= 10;
+        };
+        let filter = function (data, callback) {
+            let result = [];
+            for (let i = 0; i < data.length; i++) {
+                if (callback(data[i]) == true) {
+                    result.push(data[i]);
+                }
+            }
+            return result;
+        }
+
+        console.log("");
+        console.log("FILTER x >= 10");
+        console.log(filter(liczby, wieksze));
+
+        // RTEDUCE
+        let pomnoz = function (x, y) {
+            return x * y;
+        };
+        let reduce = function (data, callback) {
+            let result;
+            if (data.length > 1) {
+                result = callback(data[0], data[1])
+                for (let i = 2; i < data.length; i++) {
+                    result = callback(result, data[i])
+                }
+            } else if (data.length == 2) {
+                result = callback(data[0], data[1])
+            } else if (data.length == 1) {
+                result = data[0];
+            }
+            return result;
+        }
+        console.log("");
+        console.log("REDUCE x * y");
+        console.log(reduce(liczby, pomnoz));
+
+    </script>
+</body>
+
+</html>

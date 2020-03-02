@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+    <div style="height:100vh; display:flex; justify-content:center; align-items:center; flex-direction: column">
+        <button onclick="myFunction()" style="font-size: 20px">START</button>
+        <p id="birth"></p>
+        <p id="todays-date"></p>
+        <p id="days-lived"></p>
+        <p id="congratulations"></p>
+    </div>
+
+    <script>
+        function myFunction() {
+
+            //BIRTH DATE
+            let date1 = prompt("Podaj swoją datę urodzenia w formacie dd.mm.rrrr", "17.01.2020");
+            let day1 = date1.slice(0, 2);
+            let month1 = date1.slice(3, 5);
+            let year1 = date1.slice(6, 10);
+            let date11 = new Date(year1, month1 - 1, day1);
+
+            //TODAYS DATE
+            let today = new Date;
+            let day2 = today.getDate();
+            if (day2 < 10) day2 = "0" + day2;
+            let month2 = today.getMonth() + 1;
+            if (month2 < 10) month2 = "0" + month2;
+            let year2 = today.getFullYear();
+            let today2 = day2 + "." + month2 + "." + year2;
+            let date22 = new Date(year2, month2 - 1, day2);
+
+            // DAYS LIVED
+            let date33 = Math.round((date22 - date11) / (1000 * 60 * 60 * 24));
+            let date44 = ((date22 - date11) / (1000 * 60 * 60 * 24 * 365)).toFixed(2);;
+
+
+            if (date1 != null) {
+                document.getElementById("birth").innerHTML =
+                    "Twoja data urodzenia to " + date1 + " r.";
+                document.getElementById("todays-date").innerHTML =
+                    "Dzisiejsza data to " + today2 + " r.";
+                document.getElementById("days-lived").innerHTML =
+                    "Przeżyłeś " + date33 + " dni życia, czyli " + date44 + " lat";
+                document.getElementById("congratulations").innerHTML =
+                    "Gratulujemy!";
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
