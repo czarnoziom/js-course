@@ -21,9 +21,7 @@ function generateHuman() {
   console.log("SURNAME: " + randomSurname);
 
   // EMAIL
-  console.log(
-    "EMAIL: " + (randomName + randomSurname + "@gmail.com").toLowerCase()
-  );
+  console.log("EMAIL: " + (randomName + randomSurname + "@gmail.com").toLowerCase());
 
   // COUNTRY
   const country = ["PL", "UK", "USA"];
