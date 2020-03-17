@@ -3,10 +3,10 @@
 // i reduce(array, reduceFn) w których stworzysz własną implementację
 // funkcji wbudowanych. Twoje funkcje mają działać tak samo jak te wbudowane
 
-var liczby = [1, 5, 10, 15, 20, 25];
+var numbers = [1, 5, 10, 15, 20, 25];
 
 // MAP
-let podwojenia = function(x) {
+let double = function(x) {
   return x + 10;
 };
 
@@ -18,8 +18,8 @@ let map = function(data, callback) {
   return result;
 };
 
-console.log("DANA TABLICA");
-console.log(liczby);
+console.log("ARRAY");
+console.log(numbers);
 console.log("");
 console.log("MAP x + 10");
-console.log(map(liczby, podwojenia));
+console.log(map(numbers, double));

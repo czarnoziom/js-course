@@ -3,24 +3,24 @@
 // i reduce(array, reduceFn) w których stworzysz własną implementację
 // funkcji wbudowanych. Twoje funkcje mają działać tak samo jak te wbudowane
 
-var liczby = [1, 5, 10, 15, 20, 25];
+var numbers = [1, 5, 10, 15, 20, 25];
 
 // FILTER
-let wieksze = function(x) {
+let biggerThan = function(x) {
   return x >= 10;
 };
 let filter = function(data, callback) {
   let result = [];
   for (let i = 0; i < data.length; i++) {
-    if (callback(data[i]) == true) {
+    if (callback(data[i]) === true) {
       result.push(data[i]);
     }
   }
   return result;
 };
 
-console.log("DANA TABLICA");
-console.log(liczby);
+console.log("ARRAY");
+console.log(numbers);
 console.log("");
 console.log("FILTER x >= 10");
-console.log(filter(liczby, wieksze));
+console.log(filter(numbers, biggerThan));

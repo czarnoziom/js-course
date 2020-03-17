@@ -3,10 +3,10 @@
 // i reduce(array, reduceFn) w których stworzysz własną implementację
 // funkcji wbudowanych. Twoje funkcje mają działać tak samo jak te wbudowane
 
-var liczby = [1, 5, 10];
+var numbers = [1, 5, 10];
 
 // RTEDUCE
-let pomnoz = function(x, y) {
+let multiply = function(x, y) {
   return x * y;
 };
 let reduce = function(data, callback) {
@@ -25,7 +25,7 @@ let reduce = function(data, callback) {
 };
 
 console.log("DANA TABLICA");
-console.log(liczby);
+console.log(numbers);
 console.log("");
 console.log("REDUCE x * y");
-console.log(reduce(liczby, pomnoz));
+console.log(reduce(numbers, multiply));
