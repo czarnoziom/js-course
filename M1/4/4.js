@@ -1,14 +1,9 @@
 // 4) Umieść 10 tablic wygenerowanych w zadaniu 3, w jednej tablicy.
 
-const array = [];
+// WITH SPREAD OPERATOR
+let array1 = [...new Array(10)].map(x =>{
+    return [...new Array(10)].map(x => {
+        return Math.floor(Math.random() * 100)
+    })});
 
-for (let j = 0; j < 10; j++) {
-    const array2 = [];
-    for (let i = 0; i < 10; i++) {
-        array2.push(Math.floor(Math.random() * 100));
-    }
-    array[j] = array2;
-}
-
-console.log(array);
-
+console.log(array1);
