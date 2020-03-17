@@ -1,25 +1,12 @@
 // 3) Wygeneruj tablicę zawierającą 10 liczb losowych.
 
-// OPTION 1 - FOR LOOP
-array = [];
 
-for (i = 1; i <= 10; i++) {
-    array.push(Math.floor(Math.random() * 100));
-}
+// WITH SPREAD OPERATOR
+let array1 = [...new Array(10)].map(x => {return Math.floor(Math.random() * 100)});
 
-console.log(array);
+console.log(array1);
 
-// // OPTION 2 - MAP
+// WITH ARRAY.FROM
+let array2 = Array.from(Array(10), (x, index) => index + Math.floor(Math.random() * 100));
 
-// let array1 = new Array(10);
-// for (i = 1; i <= 10; i++) {
-//   array1.push(1);
-// }
-
-// let array2 = array1.map(
-//   (x) => {
-//     return x + Math.floor(Math.random() * 100);
-//   }
-// );
-
-// console.log(array2);
+console.log(array2);
