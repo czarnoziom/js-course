@@ -1,26 +1,35 @@
-// 5) Stwórz tablicę zawierającą 15 wyrazów. Utwórz funkcję która jako argument przyjmuje wyraz.
-
-let array = ['czerwony', 'niebieski', 'biały', 'czarny', 'szary', 'żółty', 'zielony',
-'pomarańczowy', 'fioletowy', 'brązowy', 'różowy', 'granatowy', 'złoty', 'srebrny', 'turkusowy'];
-
-array2 = array.join(", ");
+// "5) Stwórz tablicę zawierającą 15 wyrazów. Utwórz funkcję która jako argument przyjmuje wyraz.
+// Funkcja ma sprawdzić czy fraza występuje w tablicy. Jeśli tak ma zwrócić informacje o tym elemencie
+// (pozycja, wartość). Jeśli nie, zwraca powiadomienie że szukanej frazy brak w tablicy."
 
 
-function checkArray(input) {
-    if (array.includes(input) == true) {
-        console.log("Tablica zawiera element: " + input + " index tego elementu to: " + array.indexOf(input));
-    } else if (input == "") {
-        console.log("Nie uzupełniłeś pola powyżej.");
-    } else {
-        console.log("Tablica nie zawiera elementu: " + input);
-    }
+const colors = ['red', 'blue', 'white', 'black', 'gray', 'yellow', 'green',
+'orange', 'purple', 'brown', 'pink', 'navy blue', 'gold', 'silver', 'turquoise'];
+
+
+function checkArray(array, input) {
+  let string = array.join(", ").toLowerCase();
+
+  if (input === undefined) {
+    console.log("You haven't completed the phrase to check");
+  } else if (string.includes(input.toLowerCase()) == true) {
+    let index = array.findIndex(element =>
+      element.includes(input.toLowerCase())
+    );
+    console.log(
+      "The array contains an element: " +
+        input +
+        ", the index of an element is: " +
+        index
+    );
+  } else {
+    console.log("The array does not contain the element: " + input);
+  }
 }
 
 // TEST 1
-checkArray('różowy');
-
+checkArray(colors, 'HiTe');
 // TEST 3
-checkArray();
-
+checkArray(colors);
 // TEST 3
-checkArray('kanarkowy');
+checkArray(colors, 'aquamarine');
