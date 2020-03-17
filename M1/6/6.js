@@ -6,18 +6,17 @@ const numbers = [2, 5, 7, 10, 34, 16, 879, 1];
 
 // OPTION 1 - FILTER
 
-let createEvenNumbersArray = array => {
-  let filterArray = value => value % 2 == 0;
-  const filtered = array.filter(filterArray);
-  return filtered;
+const getEvenNumbersInArray = array => {
+  let evenNumbersFilter = no => no % 2 == 0;
+  return array.filter(evenNumbersFilter);
 };
 
 // TEST
-console.log(createEvenNumbersArray(numbers));
+console.log(getEvenNumbersInArray (numbers));
 
 // // OPTION 2 - NO FILTER
 
-// let createEvenNumbersArray = (array) => {
+// let getEvenNumbersInArray  = (array) => {
 //     const newArray = [];
 //     for (i = 0; i <= array.length; i++) {
 //         if (array[i] % 2 == 0) {
@@ -28,4 +27,4 @@ console.log(createEvenNumbersArray(numbers));
 // }
 
 // // TEST
-// createEvenNumbersArray(numbers);
+// getEvenNumbersInArray (numbers);
