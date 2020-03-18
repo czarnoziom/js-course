@@ -5,9 +5,10 @@
 // // Dodatkowe pola - phoneNr - random 9 numbers,
 // // oraz _id = objectId() - wykorzystać bibliotekę  https://www.npmjs.com/package/uuid
 
+"use strict";
+const fs = require("fs");
+
 function generateHuman() {
-  "use strict";
-  const fs = require("fs");
   let rawdata = fs.readFileSync("content.json");
   let content = JSON.parse(rawdata);
 
@@ -21,7 +22,9 @@ function generateHuman() {
   console.log("SURNAME: " + randomSurname);
 
   // EMAIL
-  console.log("EMAIL: " + (randomName + randomSurname + "@gmail.com").toLowerCase());
+  console.log(
+    "EMAIL: " + (randomName + randomSurname + "@gmail.com").toLowerCase()
+  );
 
   // COUNTRY
   const country = ["PL", "UK", "USA"];

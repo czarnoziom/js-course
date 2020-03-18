@@ -10,10 +10,10 @@ let double = function(x) {
   return x + 10;
 };
 
-let map = function(data, callback) {
+let map = function(array, callback) {
   let result = [];
-  for (let i = 0; i < data.length; i++) {
-    result.push(callback(data[i]));
+  for (let i = 0; i < array.length; i++) {
+    result.push(callback(array[i]));
   }
   return result;
 };

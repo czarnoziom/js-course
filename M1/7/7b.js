@@ -9,11 +9,11 @@ var numbers = [1, 5, 10, 15, 20, 25];
 let biggerThan = function(x) {
   return x >= 10;
 };
-let filter = function(data, callback) {
+let filter = function(array, callback) {
   let result = [];
-  for (let i = 0; i < data.length; i++) {
-    if (callback(data[i]) === true) {
-      result.push(data[i]);
+  for (let i = 0; i < array.length; i++) {
+    if (callback(array[i]) === true) {
+      result.push(array[i]);
     }
   }
   return result;
