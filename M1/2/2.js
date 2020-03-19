@@ -5,17 +5,14 @@
 
 function checkTriangle(a, b, c) {
   // VALIDATION
-  if (typeof a == "number" && typeof b == "number" && typeof c == "number") {
+  if (typeof a === "number" && typeof b === "number" && typeof c === "number") {
     // SORTING DATA
-    let array = [a, b, c].sort(function(a, b) {
-      return a - b;
-    });
-    let a1 = array[0];
-    let b1 = array[1];
-    let c1 = array[2];
-
+    const array = [a, b, c].sort((a, b) => a - b);
     // CHECKING CONDITION
-    if (Math.pow(a1, 2) + Math.pow(b1, 2) == Math.pow(c1, 2)) {
+    if (
+      Math.pow(array[0], 2) + Math.pow(array[1], 2) ==
+      Math.pow(array[2], 2)
+    ) {
       console.log("You can build rectangular triangle from given edges");
     } else {
       console.log("You can't build rectangular triangle from given edges");

@@ -7,7 +7,7 @@ const numbers = [2, 5, 7, 10, 34, 16, 879, 1];
 // OPTION 1 - FILTER
 
 const getEvenNumbersInArray = array => {
-  let evenNumbersFilter = no => no % 2 == 0;
+  const evenNumbersFilter = no => no % 2 == 0;
   return array.filter(evenNumbersFilter);
 };
 
