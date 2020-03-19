@@ -7,32 +7,30 @@
 
 "use strict";
 const fs = require("fs");
+let rawdata = fs.readFileSync("content.json");
+let content = JSON.parse(rawdata);
 
 function generateHuman() {
-  let rawdata = fs.readFileSync("content.json");
-  let content = JSON.parse(rawdata);
+  let human = {};
 
   //   NAME
-  let randomName = content[Math.floor(Math.random() * 100)].name.first;
-  console.log("");
-  console.log("NAME: " + randomName);
+  human.name = content[Math.floor(Math.random() * 100)].name.first;
 
   // SURNAME
-  let randomSurname = content[Math.floor(Math.random() * 100)].name.last;
-  console.log("SURNAME: " + randomSurname);
+  human.surname = content[Math.floor(Math.random() * 100)].name.last;
 
   // EMAIL
-  console.log(
-    "EMAIL: " + (randomName + randomSurname + "@gmail.com").toLowerCase()
-  );
+  human.mail = (human.name + human.surname + "@gmail.com").toLowerCase();
 
   // COUNTRY
   const country = ["PL", "UK", "USA"];
-  console.log("COUNTRY: " + country[Math.floor(Math.random() * 3)]);
+  human.country = country[Math.floor(Math.random() * 3)];
 
   // AGE
-  console.log("AGE: " + (Math.floor(Math.random() * 67) + 18));
+  human.age = Math.floor(Math.random() * 67) + 18;
+
+  return human;
 }
 
 // TEST
-generateHuman();
+console.log(generateHuman());
