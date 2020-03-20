@@ -3,34 +3,32 @@
 // i reduce(array, reduceFn) w których stworzysz własną implementację
 // funkcji wbudowanych. Twoje funkcje mają działać tak samo jak te wbudowane
 
-var numbers1 = [1];
-var numbers2 = [1, 2];
-var numbers3 = [1, 2, 3, 10, 10];
+const numbers = [1, 2, 3];
 
-// RTEDUCE
-
-let multiply = function(x, y) {
-  return x * y;
-};
-
-let reduce = function(array, callback, initialValue) {
-  if (typeof initialValue === "number") array.unshift(initialValue);
-  let result;
-  if (array.length == 1) result = array[0];
-  else if (array.length > 1) {
-    result = callback(array[0], array[1]);
-    for (let i = 2; i < array.length; i++) {
-      result = callback(result, array[i]);
-    }
+const reduce = (array, callback, initialValue) => {
+  let acc = initialValue === undefined ? 0 : initialValue;
+  for (let i = 0; i < array.length; i++) {
+    acc = callback(acc, array[i], i, array);
   }
-  return result;
+  return acc;
 };
 
-console.log(`ARRAY: [${numbers1}] REDUCE: ${reduce(numbers1, multiply)}`);
-console.log(`ARRAY: [${numbers1}] REDUCE: ${reduce(numbers1, multiply, 2)}`);
+const multiply = (a, b) => {
+  return a * b;
+};
 
-console.log(`ARRAY: [${numbers2}] REDUCE: ${reduce(numbers2, multiply)}`);
-console.log(`ARRAY: [${numbers2}] REDUCE: ${reduce(numbers2, multiply,2)}`);
+const add = (a, b) => {
+  return a + b;
+};
 
-console.log(`ARRAY: [${numbers3}] REDUCE: ${reduce(numbers3, multiply)}`);
-console.log(`ARRAY: [${numbers3}] REDUCE: ${reduce(numbers3, multiply,2)}`);
+const doubled = (total, amount) => {
+  total.push(amount * 2);
+  return total;
+};
+
+// TEST 1
+console.log(reduce(numbers, multiply));
+// TEST 2
+console.log(reduce(numbers, add));
+// TEST 3
+console.log(reduce(numbers, doubled, []));
