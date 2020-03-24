@@ -13,9 +13,9 @@ const reduce = (array, callback, initialValue) => {
   return acc;
 };
 
-const multiply = (a, b) => {
-  return a * b;
-};
+// const multiply = (a, b) => {
+//   return a * b;
+// };
 
 const add = (a, b) => {
   return a + b;
@@ -26,8 +26,8 @@ const doubled = (total, amount) => {
   return total;
 };
 
-// TEST 1
-console.log(reduce(numbers, multiply));
+// // TEST 1
+// console.log(reduce(numbers, multiply));
 // TEST 2
 console.log(reduce(numbers, add));
 // TEST 3
