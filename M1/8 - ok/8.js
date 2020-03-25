@@ -9,6 +9,7 @@
 const fs = require("fs");
 let rawdata = fs.readFileSync("content.json");
 let content = JSON.parse(rawdata);
+const country = ["PL", "UK", "USA"];
 
 function generateHuman() {
   let human = {};
@@ -23,7 +24,7 @@ function generateHuman() {
   human.mail = (human.name + human.surname + "@gmail.com").toLowerCase();
 
   // COUNTRY
-  const country = ["PL", "UK", "USA"];
+
   human.country = country[Math.floor(Math.random() * 3)];
 
   // AGE

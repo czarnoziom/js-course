@@ -8,11 +8,11 @@ const colors = ['red', 'blue', 'white', 'black', 'gray', 'yellow', 'green',
 
 
 function checkArray(array, input) {
-  let newArray = array.join(", ").toLowerCase();
+  let newString = array.join(", ").toLowerCase();
 
   if (input === undefined) {
     console.log("You haven't completed the phrase to check");
-  } else if (newArray.includes(input.toLowerCase())) {
+  } else if (newString.includes(input.toLowerCase())) {
     let index = array.findIndex(element =>
       element.includes(input.toLowerCase())
     );

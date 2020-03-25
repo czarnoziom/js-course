@@ -12,7 +12,7 @@ let biggerThan = function(x) {
 let filter = function(array, callback) {
   let result = [];
   for (let i = 0; i < array.length; i++) {
-    if (callback(array[i]) === true) {
+    if (callback(array[i]) !== false) {
       result.push(array[i]);
     }
   }

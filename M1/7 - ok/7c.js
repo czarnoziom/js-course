@@ -7,7 +7,7 @@ const numbers = [1, 2, 3];
 
 const reduce = (array, callback, initialValue) => {
   let acc = initialValue === undefined ? 0 : initialValue;
-  for (let i = 0; i < array.length; i++) {
+  for (const i in array) {
     acc = callback(acc, array[i], i, array);
   }
   return acc;
