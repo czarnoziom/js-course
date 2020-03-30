@@ -34,11 +34,11 @@
 //     Kod z warstw wyższego poziomu nie powinien zależeć od kodu z niższych warstw, ale od abstrakcji.
 //     Abstrakcje nie powinny być zależne od implementacji.
 
-let _ = require('lodash');
+let _ = require("lodash");
 
 class Contact {
   constructor(name, surname, email) {
-    let uuid = require('uuid/v4');
+    let uuid = require("uuid/v4");
     this.id = uuid().slice(0, 6);
     this.name = name;
     this.surname = surname;
@@ -46,7 +46,7 @@ class Contact {
     this.date = new Date();
   }
   updateContact(key, value) {
-    if (Object.keys(this).includes(key)) {
+    if (Object.keys(this).includes(key) && key !== "id") {
       this[key] = value;
       this.date = new Date();
     }
@@ -58,14 +58,14 @@ class Contact {
 
 class Group {
   constructor(name) {
-    let uuid = require('uuid/v4');
+    let uuid = require("uuid/v4");
     this.id = uuid().slice(0, 3);
     this.name = name;
     this.date = new Date();
     this.contacts = [];
   }
   updateGroup(key, value, ...contacts) {
-    if (Object.keys(this).includes(key)) {
+    if (Object.keys(this).includes(key) && key !== "id") {
       this[key] = value;
       this.date = new Date();
     }
@@ -81,13 +81,11 @@ class Group {
     this.contacts.push(contact);
   }
   hasContact(contact) {
-    let contactIndex = this.contacts.findIndex(obj => obj === contact);
-    if (contactIndex !== -1) return true;
-    else return false;
+    return this.contacts.indexOf(contact) !== -1 ? true : false;
   }
   deleteContactFromGroup(contact) {
-    let contactIndex = this.contacts.findIndex(obj => obj === contact);
-    if (contactIndex !== -1) this.contacts.splice(contactIndex, 1);
+    let index = this.contacts.indexOf(contact);
+    if (index !== -1) this.contacts.splice(index, 1);
   }
 }
 
@@ -104,74 +102,82 @@ class AddressBook {
     const group = new Group(name);
     this.groups.push(group);
   }
-  updateContactInAB(uuid, key, value) {
+  updateContact(uuid, key, value) {
     let index = this.contacts.findIndex(obj => obj.id === uuid);
     if (index !== -1) {
-      this.contacts[index].updateContact(key,value);
+      this.contacts[index].updateContact(key, value);
       this.contacts[index].date = new Date();
     }
+    for (let i = 0; i <= this.groups.length - 1; i++) {
+      let index = this.groups[i].contacts.findIndex(obj => obj.id === uuid);
+      if (index !== -1 && key !== "id") {
+        this.groups[i].contacts[index].updateContact(key, value);
+        this.groups[i].contacts[index].date = new Date();
+      }
+    }
   }
-  updateGroupInAB(uuid, key, value, ...contacts) {
+  updateGroup(uuid, key, value, ...contacts) {
     let index = this.groups.findIndex(obj => obj.id === uuid);
     if (index !== -1) {
       this.groups[index].updateGroup(key, value, ...contacts);
       this.groups[index].date = new Date();
     }
   }
-  addContactToGroupInAB(uuid, groupUUID) {
+  addContactToGroup(uuid, groupUUID) {
     let contactIndex = this.contacts.findIndex(obj => obj.id === uuid);
     let toPush = this.contacts[contactIndex];
     let groupIndex = this.groups.findIndex(obj => obj.id === groupUUID);
     this.groups[groupIndex].contacts.push(toPush);
   }
-  delateContact(uuid) {
+  deleteContact(uuid) {
     let index = this.contacts.findIndex(obj => obj.id === uuid);
     this.contacts.splice(index, 1);
   }
-  delateGroup(uuid) {
+  deleteGroup(uuid) {
     let index = this.groups.findIndex(obj => obj.id === uuid);
     this.groups.splice(index, 1);
   }
-  delateFromGroup(uuid, groupUUID) {
+  deleteFromGroup(uuid, groupUUID) {
     let contactIndex = this.contacts.findIndex(obj => obj.id === uuid);
-    let toDelate = this.contacts[contactIndex];
+    let todelete = this.contacts[contactIndex];
     let groupIndex = this.groups.findIndex(obj => obj.id === groupUUID);
-    this.groups[groupIndex].contacts.splice(toDelate, 1);console
+    this.groups[groupIndex].contacts.splice(todelete, 1);
+    console;
   }
   readContact(uuid) {
     let index = this.contacts.findIndex(obj => obj.id === uuid);
-    console.log(this.contacts[index]);
+    this.contacts[index].readContact();
   }
   readGroup(uuid) {
     let index = this.groups.findIndex(obj => obj.id === uuid);
-    console.log(this.groups[index]);
+    this.groups[index].readGroup();
   }
   sortContacts(key, order) {
-    this.contacts = _.orderBy(this.contacts, [key],[order]);
+    this.contacts = _.orderBy(this.contacts, [key], [order]);
   }
   sortGroup(groupUUID, key, order) {
     let index = this.groups.findIndex(obj => obj.id === groupUUID);
-    this.groups[index] = _.orderBy(this.groups[index], [key],[order]);
+    this.groups[index] = _.orderBy(this.groups[index], [key], [order]);
   }
 }
 
 // CONTACT - TESTS
-let contact1 = new Contact('Chris', 'Pratt', 'chrispratt@gmail.com');
-contact1.updateContact('surname', 'Hemsworth');
-contact1.updateContact('email', 'chrishemsworth@gmail.com');
-contact1.updateContact('id', '111111');
+let contact1 = new Contact("Chris", "Pratt", "chrispratt@gmail.com");
+contact1.updateContact("surname", "Hemsworth");
+contact1.updateContact("email", "chrishemsworth@gmail.com");
+contact1.updateContact("id", "111111");
 // contact1.readContact();
 
 // GROUP - TESTS
-let group1 = new Group('Actors');
+let group1 = new Group("Actors");
 group1.addContactToGroup(contact1);
-group1.updateGroup('name', 'Actresses');
-group1.updateGroup('id', '111');
+group1.updateGroup("name", "Actresses");
+group1.updateGroup("id", "111");
 // group1.readGroup();
-let contact2 = new Contact('Meryl', 'Streep', 'merylstreep@gmail.com');
-let contact3 = new Contact('Kate', 'Winslet', 'katewinslet@gmail.com');
-contact3.updateContact('id','333333');
-group1.updateGroup('name', 'Actresses', contact1, contact2, contact3);
+let contact2 = new Contact("Meryl", "Streep", "merylstreep@gmail.com");
+let contact3 = new Contact("Kate", "Winslet", "katewinslet@gmail.com");
+contact3.updateContact("id", "333333");
+group1.updateGroup("name", "Actresses", contact1, contact2, contact3);
 group1.deleteContactFromGroup(contact1);
 // console.log(group1.hasContact(contact1));
 // console.log(group1.hasContact(contact2));
@@ -179,26 +185,32 @@ group1.deleteContactFromGroup(contact1);
 
 // ADDRESSBOOK - TESTS
 let address1 = new AddressBook();
-address1.createNewContact('Chris', 'Pratt', 'chrispratt@gmail.com');
-address1.createNewContact('Gary', 'Oldman', 'garyoldman@gmail.com');
-address1.createNewContact('Morgan', 'Freeman', 'morganfreeman@gmail.com');
-address1.createNewContact('Idris', 'Elba', 'idriselba@gmail.com');
-address1.contacts[0].id = '222222';
-address1.contacts[1].id = '333333';
-address1.updateContactInAB('222222','surname', 'Hemsworth');
-address1.createNewGroup('Friends');
-address1.createNewGroup('Directors');
-address1.groups[0].id='111';
-address1.groups[1].id='222';
-address1.addContactToGroupInAB('222222','111')
-address1.addContactToGroupInAB('333333','111')
-address1.updateGroupInAB('111', 'name', 'Actors');
-address1.delateContact('333333');
-address1.delateGroup('222');
-address1.delateFromGroup('222222','111');
+address1.createNewContact("Chris", "Pratt", "chrispratt@gmail.com");
+address1.createNewContact("Gary", "Oldman", "garyoldman@gmail.com");
+address1.createNewContact("Morgan", "Freeman", "morganfreeman@gmail.com");
+address1.createNewContact("Idris", "Elba", "idriselba@gmail.com");
+address1.contacts[0].id = "222222";
+address1.contacts[1].id = "333333";
+address1.updateContact("222222", "surname", "Hemsworth");
+address1.createNewGroup("Friends");
+address1.createNewGroup("Directors");
+address1.groups[0].id = "111";
+address1.groups[1].id = "222";
+address1.addContactToGroup("222222", "111");
+address1.addContactToGroup("333333", "111");
+address1.addContactToGroup("333333", "222");
+address1.updateGroup("111", "name", "Actors");
+// address1.deleteContact("333333");
+// address1.deleteGroup("222");
+// address1.deleteFromGroup("222222", "111");
 // address1.readContact('222222');
 // address1.readGroup('111');
-address1.sortContacts('name','desc');
-console.log(address1);
+address1.sortContacts("name", "desc");
+address1.updateContact("333333", "surname", "Cooper");
+// address1.readContact('222222');
+// address1.readGroup('222');
+// console.log(address1.groups[0].contacts);
+// console.log(address1.groups[1].contacts);
 
+console.log(address1);
 
