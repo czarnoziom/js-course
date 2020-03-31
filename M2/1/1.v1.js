@@ -35,10 +35,10 @@
 //     Abstrakcje nie powinny być zależne od implementacji.
 
 let _ = require("lodash");
+const uuid = require("uuid/v4");
 
 class Contact {
   constructor(name, surname, email) {
-    let uuid = require("uuid/v4");
     this.id = uuid().slice(0, 6);
     this.name = name;
     this.surname = surname;
@@ -58,7 +58,6 @@ class Contact {
 
 class Group {
   constructor(name) {
-    let uuid = require("uuid/v4");
     this.id = uuid().slice(0, 3);
     this.name = name;
     this.date = new Date();
@@ -108,7 +107,7 @@ class AddressBook {
       this.contacts[index].updateContact(key, value);
       this.contacts[index].date = new Date();
     }
-    for (let i = 0; i <= this.groups.length - 1; i++) {
+    for (let i in this.groups) {
       let index = this.groups[i].contacts.findIndex(obj => obj.id === uuid);
       if (index !== -1 && key !== "id") {
         this.groups[i].contacts[index].updateContact(key, value);
@@ -209,8 +208,8 @@ address1.sortContacts("name", "desc");
 address1.updateContact("333333", "surname", "Cooper");
 // address1.readContact('222222');
 // address1.readGroup('222');
-// console.log(address1.groups[0].contacts);
-// console.log(address1.groups[1].contacts);
+console.log(address1.groups[0].contacts);
+console.log(address1.groups[1].contacts);
 
 console.log(address1);
 
