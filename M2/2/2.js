@@ -37,7 +37,7 @@ class Item {
   countAfterDiscount() {
     let discount = parseFloat(this.discount);
     if (discount > 0 && discount <= 100)
-      return parseFloat((this.price * (100 - discount)/ 100).toFixed(2));
+      return parseFloat(((this.price * (100 - discount)) / 100).toFixed(2));
     else return this.price;
   }
 }
@@ -52,20 +52,22 @@ class Cart {
     this.discountCodes = [];
   }
   countItemTotalPrice(item) {
-    return item.afterDiscount * item.quantity
+    return parseFloat((item.afterDiscount * item.quantity).toFixed(2));
   }
   countTotalPrice() {
-    let discount =this.discountCodes.discount !== undefined? (100 - this.discountCodes.discount) / 100: 1;
+    let discount = this.discountCodes.discount
+      ? (100 - this.discountCodes.discount) / 100
+      : 1;
     let total = 0;
     for (let i in this.itemList) total += this.itemList[i].totalPrice;
-    return parseFloat((total * discount).toFixed(2)) ;
+    return parseFloat((total * discount).toFixed(2));
   }
   countTotalDiscount() {
     let afterDiscount = this.totalPrice;
     let beforeDiscount = 0;
     for (let i in this.itemList)
       beforeDiscount += this.itemList[i].price * this.itemList[i].quantity;
-    return (100 - (afterDiscount * 100) / beforeDiscount).toFixed(2) +"%";
+    return (100 - (afterDiscount * 100) / beforeDiscount).toFixed(2) + "%";
   }
   countTotalQuantity() {
     let total = 0;
@@ -73,37 +75,43 @@ class Cart {
     return parseFloat(total.toFixed(2));
   }
   addToCart(item, quantity) {
-    item.quantity = quantity;
-    item.totalPrice = this.countItemTotalPrice(item);
-    this.itemList.push(item);
-    this.totalPrice = this.countTotalPrice();
-    this.totalDiscount = this.countTotalDiscount();
-    this.totalQuantity = this.countTotalQuantity();
+    let index = this.itemList.indexOf(item);
+    if (index !== -1) {
+      this.itemList[index].quantity += quantity;
+      this.itemList[index].totalPrice = this.countItemTotalPrice(item);
+    } else {
+      item.quantity = quantity;
+      item.totalPrice = this.countItemTotalPrice(item);
+      this.itemList.push(item);
+    }
+    this.update();
   }
   deleteFromCart(item, quantity) {
     let index = this.itemList.indexOf(item);
     if (index !== -1) {
       if (quantity === this.itemList[index].quantity) {
         this.itemList.splice(index, 1);
-      } else{
+      } else {
         this.itemList[index].quantity -= quantity;
       }
     }
     item.totalPrice = this.countItemTotalPrice(item);
-    this.totalPrice = this.countTotalPrice();
-    this.totalDiscount = this.countTotalDiscount();
-    this.totalQuantity = this.countTotalQuantity();
+    this.update();
   }
   // Assumption - You can add only one discount code for one cart
   addDiscountCode(id) {
     for (let i in discountCodes) {
       if (discountCodes[i].id === id) this.discountCodes = discountCodes[i];
     }
+    this.update();
+  }
+  read() {
+    console.log(this);
+  }
+  update() {
     this.totalPrice = this.countTotalPrice();
     this.totalDiscount = this.countTotalDiscount();
-  }
-  read(){
-    console.log(this);
+    this.totalQuantity = this.countTotalQuantity();
   }
 }
 
@@ -127,7 +135,8 @@ cart1.addToCart(juice, 5);
 cart1.itemList[2].id = "333";
 cart1.addToCart(lemon, 2);
 cart1.addDiscountCode("4lsj8");
-
-cart1.deleteFromCart(lemon, 1);
+cart1.deleteFromCart(tomato, 1);
+cart1.addToCart(lemon, 1);
+cart1.addToCart(lemon, 2);
 
 cart1.read();
