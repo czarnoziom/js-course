@@ -37,7 +37,7 @@ class Item {
   countAfterDiscount() {
     let discount = parseFloat(this.discount);
     if (discount > 0 && discount <= 100)
-      return Math.round(this.price * (100 - discount)) / 100;
+      return parseFloat((this.price * (100 - discount)/ 100).toFixed(2));
     else return this.price;
   }
 }
@@ -52,31 +52,25 @@ class Cart {
     this.discountCodes = [];
   }
   countItemTotalPrice(item) {
-    return Math.round(100 * item.afterDiscount * item.quantity) / 100;
+    return item.afterDiscount * item.quantity
   }
   countTotalPrice() {
-    let discount =
-      this.discountCodes.discount !== undefined
-        ? (100 - this.discountCodes.discount) / 100
-        : 1;
+    let discount =this.discountCodes.discount !== undefined? (100 - this.discountCodes.discount) / 100: 1;
     let total = 0;
     for (let i in this.itemList) total += this.itemList[i].totalPrice;
-    return Math.round(total * discount * 100) / 100;
+    return parseFloat((total * discount).toFixed(2)) ;
   }
   countTotalDiscount() {
     let afterDiscount = this.totalPrice;
     let beforeDiscount = 0;
     for (let i in this.itemList)
       beforeDiscount += this.itemList[i].price * this.itemList[i].quantity;
-    return (
-      Math.round(100 * (100 - (afterDiscount * 100) / beforeDiscount)) / 100 +
-      "%"
-    );
+    return (100 - (afterDiscount * 100) / beforeDiscount).toFixed(2) +"%";
   }
   countTotalQuantity() {
     let total = 0;
     for (let i in this.itemList) total += this.itemList[i].quantity;
-    return Math.round(total * 100) / 100;
+    return parseFloat(total.toFixed(2));
   }
   addToCart(item, quantity) {
     item.quantity = quantity;
@@ -116,7 +110,7 @@ class Cart {
 // ITEM - TESTS
 tomato = new Item("tomato", "vegetables", 5.5, 5);
 apple = new Item("apple", "fruits", 2.13, 0);
-juice = new Item("juice", "dirinks", 7.21, 5);
+juice = new Item("juice", "dirinks", 10, 10);
 lemon = new Item("lemon", "fruit", 1.23, 0);
 tomato.updateItem("price", 7.11);
 apple.updateItem("discount", "2%");
