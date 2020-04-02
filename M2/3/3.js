@@ -25,7 +25,7 @@ let passwordValidator = require('password-validator');
 const schema = new passwordValidator();
 schema
 .is().min(8)                                    // Minimum length 8
-.is().max(20)                                   // Maximum length 100
+.is().max(20)                                   // Maximum length 20
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
 .has().digits()                                 // Must have digits
@@ -34,6 +34,7 @@ schema
 
 class User {
   constructor(name, surname, dateOfBirth, password, gender, email) {
+    this.validation();
     this.id = uuid().slice(0, 3);
     this.name = name;
     this.surname = surname;
@@ -42,7 +43,6 @@ class User {
     this.gender = gender;
     this.email = email;
     this.accessLevel = "user";
-    this.validation();
     this.date = moment().format('DD/MM/YYYY');
   }
 
