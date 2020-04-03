@@ -1,13 +1,13 @@
 // 3) Stwórz strukturę danych związaną z użytkownikami.
 
 // Obiekt charakteryzujący użytkownika:
-// Ma mieć: Imię, Nazwisko, datę urodzenia, haslo, płeć, adres email, poziom dostepu = ""user""
+// Ma mieć: Imię, Nazwisko, datę urodzenia, haslo, płeć, adres email, poziom dostepu = ''user''
 // Ma umożliwiać: zmianę email
 
 // Obiekt charakteryzujący administratora:
 // Obiekt ten ma dziedziczyć po użytkowniku informacje z dodatkowymi możliwościami
-// Ma Miec: poziom dostepu dla siebie = ""admin""
-// Ma umożliwiać: zmieniać w obiekcie użytkownik poziom dostępu na ""admin"", oraz
+// Ma Miec: poziom dostepu dla siebie = ''admin''
+// Ma umożliwiać: zmieniać w obiekcie użytkownik poziom dostępu na ''admin'', oraz
 // modyfikować jego hasło.
 
 // Dodatkowo User ma mieć walidacje wykonaną za pomocą is.js oraz datę obsługiwaną przez bibliotekę
@@ -17,8 +17,8 @@
 // musi być niepuste jeśli któraś z walidacji się nie powiedzie obiekt ma nie być tworzony, tylko
 // ma zwracać error z odpowiednimi komunikatami o niepowiedzionej walidacji
 
-let uuid = require("uuid/v4");
-let is = require("is_js");
+let uuid = require('uuid/v4');
+let is = require('is_js');
 var moment = require('moment');
 let passwordValidator = require('password-validator');
 
@@ -34,7 +34,7 @@ schema
 
 class User {
   constructor(name, surname, dateOfBirth, password, gender, email) {
-    this.validation();
+    this.validation(name, surname, dateOfBirth, password, gender, email);
     this.id = uuid().slice(0, 3);
     this.name = name;
     this.surname = surname;
@@ -42,7 +42,7 @@ class User {
     this.password = password;
     this.gender = gender;
     this.email = email;
-    this.accessLevel = "user";
+    this.accessLevel = 'user';
     this.date = moment().format('DD/MM/YYYY');
   }
 
@@ -50,7 +50,7 @@ class User {
     if (is.empty(gender)) {
       throw Error(`Gender is required (You can't leave this blank)`);
     }
-    if (is.not.inArray(gender, ["male", "female"])) {
+    if (is.not.inArray(gender, ['male', 'female'])) {
       throw Error(`Incorrect gender format. (Please enter 'male' or 'female')`);
     }
   }
@@ -79,16 +79,16 @@ class User {
     }
   }
 
-  validation() {
-    if (is.empty(this.name) || is.empty(this.surname)) {
+  validation(name, surname, dateOfBirth, password, gender, email) {
+    if (is.empty(name) || is.empty(surname)) {
       throw Error(`Name and surname are required (You can't leave this blank)`);
     }
-    if (is.empty(this.dateOfBirth)) {
+    if (is.empty(dateOfBirth)) {
       throw Error(`Date of birth is required (You can't leave this blank)`);
     }
-    this.genderValidation(this.gender);
-    this.emailValidation(this.email);
-    this.passwordValidation(this.password);
+    this.genderValidation(gender);
+    this.emailValidation(email);
+    this.passwordValidation(password);
   }
 
   updateEmail(newEmail) {
@@ -101,10 +101,10 @@ class User {
 class Admin extends User {
   constructor(id, name, surname, dateOfBirth, password, gender, email) {
     super(id, name, surname, dateOfBirth, password, gender, email);
-    this.accessLevel = "admin";
+    this.accessLevel = 'admin';
   }
   changeUserAccessLevelToAdmin(user) {
-    user.accessLevel = "admin";
+    user.accessLevel = 'admin';
     this.date = moment().format('DD/MM/YYYY');
   }
   changeUserPassword(user, password) {
@@ -114,9 +114,9 @@ class Admin extends User {
   }
 }
 
-let user1 = new User("John","Doe","01.01.1991","Password123#","male","jd@gmail.com");
-let user2 = new Admin("Katy","Clinton","01.01.1987","Password123#","female","mc@gmail.com");
-user2.changeUserPassword(user1, "newPassworjd123$");
+let user1 = new User('John','Doe','01.01.1991','Password123#','male','jd@gmail.com');
+let user2 = new Admin('Katy','Clinton','01.01.1987','Password123#','female','mc@gmail.com');
+user2.changeUserPassword(user1, 'newPassworjd123$');
 user1.updateEmail('abcd@gmail.com');
 console.log(user1);
 console.log(user2);
