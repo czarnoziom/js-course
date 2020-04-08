@@ -58,8 +58,8 @@ class Library {
   constructor() {
     this.books = [];
   }
-  addBooks(...book) {
-    this.books.push(book);
+  addBooks(...books) {
+    this.books.push(books);
   }
   deleteBooks(...books) {
     for (let i in books) {
