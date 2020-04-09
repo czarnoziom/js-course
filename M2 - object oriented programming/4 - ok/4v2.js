@@ -95,13 +95,11 @@ class Library {
   }
 
   getBookIndexById(id) {
-    let index = this.books.findIndex((obj) => obj.id === id);
-    return index;
+    return this.books.findIndex((obj) => obj.id === id);
   }
 
   getUserIndexById(id) {
-    let index = this.users.findIndex((obj) => obj.id === id);
-    return index;
+    return this.users.findIndex((obj) => obj.id === id);
   }
 
   deleteBooks(...booksIds) {
