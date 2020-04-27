@@ -6,4 +6,6 @@ function howOldAreYou (yearOfBirth){
     return date - yearOfBirth
 };
 
-console.log(`You are ${howOldAreYou(1991)} years old.`);
+// console.log(`You are ${howOldAreYou(1991)} years old.`);
+
+module.exports = {howOldAreYou};

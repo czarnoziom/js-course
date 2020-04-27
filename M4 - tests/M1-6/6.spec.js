@@ -11,27 +11,27 @@ describe("ARRAY:Numbers TESTS", () => {
     expect(numbers).to.be.array();
   });
 
-  test("All 'numbers' array elements should be numbers", () => {
+  test("All array elements should be numbers", () => {
     for (i in numbers) expect(typeof(numbers[i])).to.equal('number');
   });
 
-  test("All 'numbers' array elements should be integer", () => {
+  test("All array elements should be integer", () => {
     for (i in numbers) expect(Number.isInteger(numbers[i])).to.be.true;
   });
 });
 
 describe("FUNCTION:'getEvenNumbersInArray' TESTS", () => {
-  test("Fuction getEvenNumbersInArray should return array", () => {
+  test("Fuction should return array", () => {
     const result = getEvenNumbersInArray(numbers);
     expect(result).to.be.array();
   });
 
-  test("Fuction getEvenNumbersInArray should return array with numbers from 'numbers' array", () => {
+  test("Fuction should return array with numbers from 'numbers' array", () => {
     const result = getEvenNumbersInArray(numbers);
     for (i in result) expect(numbers).to.include(result[i]);
   });
 
-  test("Fuction getEvenNumbersInArray should return array with  even numbers", () => {
+  test("Fuction should return array with  even numbers", () => {
     const result = getEvenNumbersInArray(numbers);
     for (i in result) expect(result[i] % 2).to.equal(0);
   });
