@@ -6,4 +6,6 @@ let array1 = [...new Array(10)].map(x =>{
         return Math.floor(Math.random() * 100)
     })});
 
-console.log(array1);
+// console.log(array1);
+
+module.exports = {array1};
