@@ -3,6 +3,8 @@
 // w argumentach można zbudować trójkąt prostokątny, lub informację że z
 // podanych długości nie można utworzyć trójkąta prostokątnego.
 
+// funkcja powinna przyjmować tylko liczby jako argumenty
+
 function checkTriangle(a, b, c) {
   // VALIDATION
   if (typeof a === "number" && typeof b === "number" && typeof c === "number") {
@@ -25,4 +27,7 @@ function checkTriangle(a, b, c) {
 }
 
 //TEST
-checkTriangle(4, 5, 3);
+// checkTriangle(4, 5, 3);
+
+
+module.exports = {checkTriangle};
