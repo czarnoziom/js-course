@@ -11,25 +11,15 @@ function checkArray(array, input) {
   let newString = array.join(", ").toLowerCase();
 
   if (input === undefined) {
-    console.log("You haven't completed the phrase to check");
+    return `You haven't completed the phrase to check`;
   } else if (newString.includes(input.toLowerCase())) {
-    let index = array.findIndex(element =>
+    let index = array.findIndex((element) =>
       element.includes(input.toLowerCase())
     );
-    console.log(
-      "The array contains an element: " +
-        input +
-        ", the index of an element is: " +
-        index
-    );
+    return `The array contains an element: ${input}, the index of an element is: ${index}`;
   } else {
-    console.log("The array does not contain the element: " + input);
+    return `The array does not contain the element: ${input}`;
   }
-}
+};
 
-// TEST 1
-checkArray(colors, 'HiTe');
-// TEST 3
-checkArray(colors);
-// TEST 3
-checkArray(colors, 'aquamarine');
+module.exports = {colors,checkArray};
