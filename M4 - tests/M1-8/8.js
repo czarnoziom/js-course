@@ -33,5 +33,4 @@ function generateHuman() {
   return human;
 }
 
-// TEST
-console.log(generateHuman());
+module.exports = { generateHuman };

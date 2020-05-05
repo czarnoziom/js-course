@@ -19,8 +19,10 @@ let filter = function(array, callback) {
   return result;
 };
 
-console.log("ARRAY");
-console.log(numbers);
-console.log("");
-console.log("FILTER x >= 10");
-console.log(filter(numbers, biggerThan));
+module.exports = {filter};
+
+// console.log("ARRAY");
+// console.log(numbers);
+// console.log("");
+// console.log("FILTER x >= 10");
+// console.log(filter(numbers, biggerThan));

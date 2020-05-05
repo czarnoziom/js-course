@@ -3,10 +3,10 @@
 // i reduce(array, reduceFn) w których stworzysz własną implementację
 // funkcji wbudowanych. Twoje funkcje mają działać tak samo jak te wbudowane
 
-var numbers = [1, 5, 10, 15, 20, 25];
+var numbers = ['stringh','STRing'];
 
 // MAP
-let double = function(x) {
+let add10 = function(x) {
   return x + 10;
 };
 
@@ -18,8 +18,5 @@ let map = function(array, callback) {
   return result;
 };
 
-console.log("ARRAY");
-console.log(numbers);
-console.log("");
-console.log("MAP x + 10");
-console.log(map(numbers, double));
+module.exports = {numbers,add10,map}
+

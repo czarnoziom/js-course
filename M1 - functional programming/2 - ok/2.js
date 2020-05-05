@@ -5,7 +5,7 @@
 
 function checkTriangle(a, b, c) {
   // VALIDATION
-  if (typeof a === "number" && typeof b === "number" && typeof c === "number") {
+  if (typeof a === 'number' && typeof b === 'number' && typeof c === 'number') {
     // SORTING DATA
     const array = [a, b, c].sort((a, b) => a - b);
     // CHECKING CONDITION
@@ -13,16 +13,14 @@ function checkTriangle(a, b, c) {
       Math.pow(array[0], 2) + Math.pow(array[1], 2) ==
       Math.pow(array[2], 2)
     ) {
-      console.log("You can build rectangular triangle from given edges");
+      return`You can build rectangular triangle from given edges`;
     } else {
-      console.log("You can't build rectangular triangle from given edges");
+      return`You can't build rectangular triangle from given edges`;
     }
   } else {
-    console.log(
-      "You have to enter 3 numbers to check if the triangle is rectangular"
-    );
+    return `You have to enter 3 numbers to check if the triangle is rectangular`;
   }
 }
 
 //TEST
-checkTriangle(4, 5, 3);
+console.log(checkTriangle(4, 5, 3));
